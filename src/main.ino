@@ -113,6 +113,7 @@ void loop() {
 			previousMillis = currentMillis;
 			tone(buzz, 1000, 20);
 			updateState = !updateState;
+			updateClock();
 		}
   	}
 
@@ -169,7 +170,17 @@ void updateClock(){
 		//selector = 0 -> hour
 		//selector = 1 -> minute
 		//selector = 2 -> second
-		if (btn2_read == HIGH) {
+
+		if (btn1_read == HIGH) {
+			if (currentMillis - previousMillis >= debounceInterval) {
+				previousMillis = currentMillis;
+				tone(buzz, 1000, 20);
+				updateState = !updateState;
+				updateClock();
+			}
+		}
+
+		if (digitalRead(btn2) == HIGH) {
 			if (currentMillis - previousMillis >= debounceInterval) {
 				previousMillis = currentMillis;
 				tone(buzz, 1000, 20);
@@ -181,7 +192,7 @@ void updateClock(){
 		}
 
 		//increment button
-		if (btn4_read == HIGH) {
+		if (digitalRead(btn4) == HIGH) {
 			if (currentMillis - previousMillis >= debounceInterval) {
 				previousMillis = currentMillis;
 				tone(buzz, 1000, 20);
@@ -207,7 +218,7 @@ void updateClock(){
 		}
 
 		//decrement button
-		if (btn3_read == HIGH) {
+		if (digitalRead(btn3) == HIGH) {
 			if (currentMillis - previousMillis >= debounceInterval) {
 				previousMillis = currentMillis;
 				tone(buzz, 1000, 20);
